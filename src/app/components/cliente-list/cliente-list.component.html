@@ -1,0 +1,64 @@
+<div class="cliente-list-container">
+  <div class="header">
+    <h1 class="title">
+      <i class="icon-users"></i>
+      Gerenciar Clientes
+    </h1>
+    <button class="btn-primary" (click)="novoCliente()">
+      <i class="icon-plus"></i>
+      Novo Cliente
+    </button>
+  </div>
+
+  <div class="clientes-grid" *ngIf="clientes.length > 0; else noClientes">
+    <div class="cliente-card" *ngFor="let cliente of clientes">
+      <div class="cliente-info">
+        <div class="cliente-avatar">
+          {{ cliente.nome.charAt(0).toUpperCase() }}
+        </div>
+        <div class="cliente-details">
+          <h3 class="cliente-nome">{{ cliente.nome }}</h3>
+          <p class="cliente-email">{{ cliente.email }}</p>
+        </div>
+      </div>
+      <div class="cliente-actions">
+        <button
+          class="btn-action btn-details"
+          [routerLink]="['/clientes', cliente.id]"
+          title="Ver detalhes"
+        >
+          <i class="icon-eye"></i>
+          Detalhes
+        </button>
+        <button
+          class="btn-action btn-edit"
+          (click)="editarCliente(cliente.id)"
+          title="Editar cliente"
+        >
+          <i class="icon-edit"></i>
+          Editar
+        </button>
+        <button
+          class="btn-action btn-delete"
+          (click)="excluirCliente(cliente.id)"
+          title="Excluir cliente"
+        >
+          <i class="icon-trash"></i>
+          Excluir
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noClientes>
+    <div class="empty-state">
+      <div class="empty-icon">📋</div>
+      <h3>Nenhum cliente cadastrado</h3>
+      <p>Comece adicionando seu primeiro cliente</p>
+      <button class="btn-primary" (click)="novoCliente()">
+        <i class="icon-plus"></i>
+        Adicionar Cliente
+      </button>
+    </div>
+  </ng-template>
+</div>
